@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <script>
+      // 서버의 응답 상태가 바뀔 때마다 호출되는 함수(이벤트 핸들러 - 특정 이벤트가 발생했을 때 호출되는 함수) 정의
+      function onReadyStateChange(event) {
+          if (ajaxRequest.readyState === XMLHttpRequest.DONE) {
+              if (ajaxRequest.status === 200) {
+                  console.log(ajaxRequest.responseText);
+              } else {
+                  console.error("request failed");
+              }
+          }
+      }
+      // XMLHttpRequest 객체 생성 (AJAX 요청을 보내기 위해)
+      const ajaxRequest = new XMLHttpRequest();
+
+      // ajaxRequest의 readystate가 변경(change) 될 때 마다 onReadyStateChange가 실행되도록 설정              
+      ajaxRequest.onreadystatechange = onReadyStateChange;
+      // GET 방식으로 "/get-with-no-parameter" 경로에 요청을 보낼 준비
+      ajaxRequest.open("get", "/get-with-no-parameter");
+      // 실제로 요청 전송!
+      ajaxRequest.send();
+  </script>
+</body>
+</html>
